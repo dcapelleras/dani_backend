@@ -8,7 +8,7 @@ exports.registerUser = (request,response)=>{
 
     console.log('received register user request');
 
-    usersModel.registerUser().then((user,error)=>{
+    usersModel.registerUser(request.body).then((user,error)=>{
 
         if(error){
             throw error.message;
@@ -16,7 +16,7 @@ exports.registerUser = (request,response)=>{
 
         if(user){
 
-            userFileModel.createDirectory().then((res,error)=>{
+            userFileModel.createDirectory(user).then((res,error)=>{
                 
                 if(error){
                     throw error.message;

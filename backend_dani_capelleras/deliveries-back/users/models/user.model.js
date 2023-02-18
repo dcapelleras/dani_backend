@@ -32,7 +32,7 @@ exports.loginUser = (info)=>{
 
     return new Promise((resolve,reject)=>{
 
-        Users.find({$or:[{email:info.eou},{username:info.eou}],password:info.password},{password:0}).exec((error,result)=>{
+        Users.findOne({$or:[{email:info.eou},{username:info.eou}],password:info.password},{password:0}).exec((error,result)=>{
             
             if(error){
                 reject(error.message);
@@ -41,7 +41,7 @@ exports.loginUser = (info)=>{
             }
             
             if(result){
-                
+                resolve(result);
                 console.log(result);
 
             }else{
@@ -84,6 +84,7 @@ exports.updateUserPic = (userid,picname)=>{
             }
             
             if(user){
+                resolve(user);
             }else{
                 resolve(undefined);
             }
